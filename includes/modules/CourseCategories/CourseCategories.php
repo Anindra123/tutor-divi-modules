@@ -40,7 +40,6 @@ class TutorCourseCategories extends ET_Builder_Module {
 					'main_content' => esc_html__( 'Content', 'tutor-lms-divi-modules' ),
 				),
 			),
-
 		);
 
 		$selector              = '%%order_class%% .tutor-single-course-meta-categories a';
@@ -56,7 +55,6 @@ class TutorCourseCategories extends ET_Builder_Module {
 					'hide_text_align'  => true,
 					'hide_line_height' => true,
 				),
-
 				'hover_style'  => array(
 					'css'              => array(
 						'main' => $selector . ':hover',
@@ -66,6 +64,14 @@ class TutorCourseCategories extends ET_Builder_Module {
 					'sub_toggle'       => 'hover_subtoggle',
 					'hide_text_align'  => true,
 					'hide_line_height' => true,
+				),
+				'category_text' => array(
+					'css'                 => array(
+						'main' => '%%order_class%% .tutor-single-course-meta-categories span',
+					),
+					'tab_slug'         => 'advanced',
+					'toggle_slug'      => 'category_label',
+					'hide_text_align'  => true,
 				),
 			),
 			'button'     => false,
@@ -184,6 +190,10 @@ class TutorCourseCategories extends ET_Builder_Module {
 						'tabbed_subtoggles' => true,
 						'title'             => esc_html__( 'Style', 'tutor-lms-divi-modules' ),
 					),
+					'category_label' => array(
+						'priority' => 25,
+						'title'    => esc_html__( 'Category Label', 'tutor-lms-divi-modules' ),
+					),
 				),
 			),
 		);
@@ -218,7 +228,7 @@ class TutorCourseCategories extends ET_Builder_Module {
 		$course = Helper::get_course( $args );
 		$label  = esc_html( $args['label'] );
 		$markup = '<div class="tutor-single-course-meta-categories tutor-course-details-category tutor-meta tutor-course-details-info">
-			' . $label . '
+			<span>' . $label . '</span>
 		<div>
 		';
 		if ( $course ) {

@@ -28,17 +28,17 @@ $default_meta = array(
 	array(
 		'icon_class' => 'tutor-icon-mortarboard',
 		'label'      => __( 'Total Enrolled', 'tutor' ),
-		'value'      => tutor_utils()->get_option( 'enable_course_total_enrolled' ) ? tutor_utils()->count_enrolled_users_by_course() : null,
+		'value'      => tutor_utils()->get_option( 'enable_course_total_enrolled' ) ? tutor_utils()->count_enrolled_users_by_course() . ' ' . __( 'Total Enrolled', 'tutor' ) : null,
 	),
 	array(
 		'icon_class' => 'tutor-icon-clock-line',
 		'label'      => __( 'Duration', 'tutor' ),
-		'value'      => get_tutor_option( 'enable_course_duration' ) ? get_tutor_course_duration_context() : null,
+		'value'      => get_tutor_option( 'enable_course_duration' ) ? ( get_tutor_course_duration_context() ? get_tutor_course_duration_context() . ' ' . __( 'Duration', 'tutor' ) : false ) : null,
 	),
 	array(
 		'icon_class' => 'tutor-icon-refresh-o',
 		'label'      => __( 'Last Updated', 'tutor' ),
-		'value'      => get_tutor_option( 'enable_course_update_date' ) ? date_i18n( get_option( 'date_format' ), strtotime( get_the_modified_date() ) ) : null,
+		'value'      => get_tutor_option( 'enable_course_update_date' ) ? get_the_modified_date( get_option( 'date_format' ) ) . ' ' . __( 'Last Updated', 'tutor' ) : null,
 	),
 );
 

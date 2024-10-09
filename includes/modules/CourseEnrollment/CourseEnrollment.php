@@ -59,6 +59,7 @@ class CourseEnrollment extends ET_Builder_Module {
 					'course_progress'       => esc_html__( 'Course Progress', 'tutor-lms-divi-modules'),
 					'enrolled_info'         => esc_html__( 'Enrolled Info', 'tutor-lms-divi-modules' ),
 					'course_alert'          => esc_html__( 'Course Alert', 'tutor-lms-divi-modules' ),
+					'course_pricing'        => esc_html__( 'Course Pricing', 'tutor-lms-divi-modules' ),
 				),
 			),
 		);
@@ -66,6 +67,15 @@ class CourseEnrollment extends ET_Builder_Module {
 		// advanced field settings.
 		$this->advanced_fields = array(
 			'fonts'      => array(
+				'course_pricing_title'   => array(
+					'label'          => esc_html__( 'Course Pricing', 'tutor-lms-divi-modules' ),
+					'css'            => array(
+						'main' => '%%order_class%% .tutor-course-single-pricing span'
+					),
+					'hide_text_align'=> true,
+					'tab_slug'       => 'advanced',
+					'toggle_slug'    => 'course_pricing'
+				),
 				'course_progress_title'  => array(
 					'label'          => esc_html__( 'Title Text', 'tutor-lms-divi-modules' ),
 					'css'            => array(

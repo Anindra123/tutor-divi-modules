@@ -218,127 +218,131 @@ class CourseEnrollment extends Component {
                 ]);
             }
         }
-        if ('enrolled' === preview_mode) {
-            additionalCss.push([
-                {
-                    selector: '.dtlms-enroll-btn-width-auto .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
-					declaration: 'display: flex; flex-direction: column;', 
-                },
-                {
-					selector: '.dtlms-enroll-btn-align-left .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
-					declaration: 'align-items: flex-start;', 
-                },
-                {
-					selector: '.dtlms-enroll-btn-align-center .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
-					declaration: 'align-items: center;',
-                },
-                {
-                    selector: '.dtlms-enroll-btn-align-right .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
-					declaration: 'align-items: flex-end;',
-                },
-                {
-                    selector: '%%order_class%% .dtlms-enroll-btn-width-auto form',
-					declaration: 'display: flex; flex-direction: column;',
-                }, 
-                {
-					selector: '%%order_class%% .dtlms-enroll-btn-align-left form, ',
-					declaration: 'align-items: flex-start;',
-                },
-                {
-					selector: '%%order_class%% .dtlms-enroll-btn-align-right form, ',
-					declaration: 'align-items: flex-end;',
-                },
-                {
-                    selector: '%%order_class%% .dtlms-enroll-btn-align-center form, ',
-					declaration: 'align-items: center;',
-                }
-            ]);
+        console.log(preview_mode);
 
-            if ( props.course_progress_background ) {
-                additionalCss.push([{
-                  selector: '%%order_class%% .tutor-course-progress-wrapper .tutor-progress-bar',
-                  declaration: `background : ${props.course_progress_background}`,
-                }]);
+        // if ('enrolled' === preview_mode) {
+            
+        // }
+
+        additionalCss.push([
+            {
+                selector: '.dtlms-enroll-btn-width-auto .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
+                declaration: 'display: flex; flex-direction: column;',
+            },
+            {
+                selector: '.dtlms-enroll-btn-align-left .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
+                declaration: 'align-items: flex-start;',
+            },
+            {
+                selector: '.dtlms-enroll-btn-align-center .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
+                declaration: 'align-items: center;',
+            },
+            {
+                selector: '.dtlms-enroll-btn-align-right .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
+                declaration: 'align-items: flex-end;',
+            },
+            {
+                selector: '%%order_class%% .dtlms-enroll-btn-width-auto form',
+                declaration: 'display: flex; flex-direction: column;',
+            },
+            {
+                selector: '%%order_class%% .dtlms-enroll-btn-align-left form, ',
+                declaration: 'align-items: flex-start;',
+            },
+            {
+                selector: '%%order_class%% .dtlms-enroll-btn-align-right form, ',
+                declaration: 'align-items: flex-end;',
+            },
+            {
+                selector: '%%order_class%% .dtlms-enroll-btn-align-center form, ',
+                declaration: 'align-items: center;',
             }
+        ]);
+
+        if (props.course_progress_background) {
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-course-progress-wrapper .tutor-progress-bar',
+                declaration: `background : ${props.course_progress_background}`,
+            }]);
+        }
+
+        additionalCss.push([{
+            selector: '%%order_class%% .tutor-card-body a',
+            declaration: `line-height: inherit; padding-bottom: 8px !important;`
+        }]);
+
+
+        if (props.course_progress_margin) {
+            const course_progress_margin = props.course_progress_margin.split('|');
 
             additionalCss.push([{
-                selector: '%%order_class%% .tutor-card-body a',
-                declaration: `line-height: inherit; padding-bottom: 8px !important;`
+                selector: '%%order_class%% .tutor-course-progress-wrapper .tutor-progress-bar',
+                declaration: `margin-top: ${course_progress_margin[0]}; margin-right: ${course_progress_margin[1]}; margin-bottom: ${course_progress_margin[2]}; margin-left: ${course_progress_margin[3]};`,
             }]);
+        }
 
+        if (props.enrolled_info_spacing) {
+            additionalCss.push([{
+                selector: '%%order_class%% .dtlms-course-enroll-info-wrapper',
+                declaration: `column-gap: ${props.enrolled_info_spacing}`
+            }]);
+        }
 
-            if ( props.course_progress_margin ) {
-                const course_progress_margin = props.course_progress_margin.split('|');
-    
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-course-progress-wrapper .tutor-progress-bar',
-                    declaration: `margin-top: ${course_progress_margin[0]}; margin-right: ${course_progress_margin[1]}; margin-bottom: ${course_progress_margin[2]}; margin-left: ${course_progress_margin[3]};`,
-                }]);
-            }
+        if (props.enrolled_info_margin) {
+            const enrolled_info_margin = props.enrolled_info_margin.split('|');
 
-            if( props.enrolled_info_spacing ) {
-                additionalCss.push([{
-                    selector: '%%order_class%% .dtlms-course-enroll-info-wrapper',
-                    declaration: `column-gap: ${props.enrolled_info_spacing}`
-                }]);
-            }
+            additionalCss.push([{
+                selector: '%%order_class%% .dtlms-course-enroll-info-wrapper',
+                declaration: `margin-top: ${enrolled_info_margin[0]}; margin-right: ${enrolled_info_margin[1]}; margin-bottom: ${enrolled_info_margin[2]}; margin-left: ${enrolled_info_margin[3]};`,
+            }]);
+        }
 
-            if ( props.enrolled_info_margin ) {
-                const enrolled_info_margin = props.enrolled_info_margin.split('|');
-    
-                additionalCss.push([{
-                    selector: '%%order_class%% .dtlms-course-enroll-info-wrapper',
-                    declaration: `margin-top: ${enrolled_info_margin[0]}; margin-right: ${enrolled_info_margin[1]}; margin-bottom: ${enrolled_info_margin[2]}; margin-left: ${enrolled_info_margin[3]};`,
-                }]);
-            }
+        if (props.course_progress_title_margin) {
+            const course_progress_title_margin = props.course_progress_title_margin.split('|');
 
-            if ( props.course_progress_title_margin ) {
-                const course_progress_title_margin = props.course_progress_title_margin.split('|');
-    
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-course-progress-wrapper h3',
-                    declaration: `margin-top: ${course_progress_title_margin[0]}; margin-right: ${course_progress_title_margin[1]}; margin-bottom: ${course_progress_title_margin[2]}; margin-left: ${course_progress_title_margin[3]};`,
-                }]);
-            }
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-course-progress-wrapper h3',
+                declaration: `margin-top: ${course_progress_title_margin[0]}; margin-right: ${course_progress_title_margin[1]}; margin-bottom: ${course_progress_title_margin[2]}; margin-left: ${course_progress_title_margin[3]};`,
+            }]);
+        }
 
-            if ( props.course_alert_background ) {
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-alert',
-                    declaration: `background: ${props.course_alert_background}`
-                }]);
-            }
+        if (props.course_alert_background) {
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-alert',
+                declaration: `background: ${props.course_alert_background}`
+            }]);
+        }
 
-            if  ( props.course_alert_gap ) {
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-alert .tutor-alert-text',
-                    declaration: `column-gap: ${props.course_alert_gap}`,
-                }]);
-            }
+        if (props.course_alert_gap) {
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-alert .tutor-alert-text',
+                declaration: `column-gap: ${props.course_alert_gap}`,
+            }]);
+        }
 
-            if ( props.course_alert_padding ) {
-                const course_alert_padding = props.course_alert_padding.split('|')
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-card .tutor-card-footer',
-                    declaration: `padding-top: ${course_alert_padding[0]}; padding-right: ${course_alert_padding[1]}; padding-bottom: ${course_alert_padding[2]}; padding-left: ${course_alert_padding[3]};`,
-                    device: 'tablet',
-                }]);
-            }
+        if (props.course_alert_padding) {
+            const course_alert_padding = props.course_alert_padding.split('|')
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-card .tutor-card-footer',
+                declaration: `padding-top: ${course_alert_padding[0]}; padding-right: ${course_alert_padding[1]}; padding-bottom: ${course_alert_padding[2]}; padding-left: ${course_alert_padding[3]};`,
+                device: 'tablet',
+            }]);
+        }
 
-            if ( props.course_alert_margin ) {
-                const course_alert_margin = props.course_alert_margin.split('|');
+        if (props.course_alert_margin) {
+            const course_alert_margin = props.course_alert_margin.split('|');
 
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-alert',
-                    declaration: `margin-top: ${course_alert_margin[0]}; margin-right: ${course_alert_margin[1]}; margin-bottom: ${course_alert_margin[2]}; margin-left: ${course_alert_margin[3]};`,
-                }]);
-            }
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-alert',
+                declaration: `margin-top: ${course_alert_margin[0]}; margin-right: ${course_alert_margin[1]}; margin-bottom: ${course_alert_margin[2]}; margin-left: ${course_alert_margin[3]};`,
+            }]);
+        }
 
-            if( props.course_alert_icon_color ) {
-                additionalCss.push([{
-                    selector: '%%order_class%% .tutor-alert-icon',
-                    declaration: `color: ${props.course_alert_icon_color}`
-                }]);
-            }
+        if (props.course_alert_icon_color) {
+            additionalCss.push([{
+                selector: '%%order_class%% .tutor-alert-icon',
+                declaration: `color: ${props.course_alert_icon_color}`
+            }]);
         }
         //button width style
         //enroll & add to cart button wrapper default width

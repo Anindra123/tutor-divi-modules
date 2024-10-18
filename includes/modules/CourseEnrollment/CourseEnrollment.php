@@ -616,6 +616,20 @@ class CourseEnrollment extends ET_Builder_Module {
 		}
 	}
 
+
+	/**
+	 * Get content
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function get_content( $args = array() ) {
+		ob_start();
+		include dtlms_get_template( 'course.enrolment' );
+		return apply_filters( 'dtlms_enrollment_template', ob_get_clean() );
+	}
+
+
 	/**
 	 * Render module output
 	 *
@@ -953,8 +967,14 @@ class CourseEnrollment extends ET_Builder_Module {
 			);
 		}
 
-		if ( 'enrolled' === $this->props['preview_mode'] || tutor_utils()->is_enrolled( $this->props['course'], get_current_user_id() ) ) {
-			ET_Builder_Element::set_style(
+		// if ( 'enrolled' === $this->props['preview_mode'] || tutor_utils()->is_enrolled( $this->props['course'], get_current_user_id() ) ) {
+
+
+			
+		// }
+
+
+		ET_Builder_Element::set_style(
 				$render_slug,
 				array(
 					'selector'		=> '.dtlms-enroll-btn-width-auto .tutor-course-sidebar-card-body:not(.tutor-course-progress-wrapper)',
@@ -1042,7 +1062,7 @@ class CourseEnrollment extends ET_Builder_Module {
 					array(
 						'selector' => '%%order_class%% .tutor-course-progress-wrapper .tutor-progress-bar',
 						'declaration' => sprintf(
-							'margin-top: %1$s;margin-right:%2$s;margin-bottom:%3$s;margin-left:%4$s;',
+							'margin-top: %1$s !important;margin-right:%2$s !important;margin-bottom:%3$s !important;margin-left:%4$s !important;',
 							esc_attr( et_pb_get_spacing( $course_progress_margin, 'top', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $course_progress_margin, 'right', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $course_progress_margin, 'bottom', '0px' ) ),
@@ -1058,7 +1078,7 @@ class CourseEnrollment extends ET_Builder_Module {
 					array(
 						'selector'    => '%%order_class%% .dtlms-course-enroll-info-wrapper',
 						'declaration' => sprintf(
-							'column-gap: %1$s;',
+							'column-gap: %1$s !important;',
 							$this->props['enrolled_info_spacing']
 						)
 					)
@@ -1074,7 +1094,7 @@ class CourseEnrollment extends ET_Builder_Module {
 					array(
 						'selector' => '%%order_class%% .dtlms-course-enroll-info-wrapper',
 						'declaration' => sprintf(
-							'margin-top: %1$s;margin-right:%2$s;margin-bottom:%3$s;margin-left:%4$s;',
+							'margin-top: %1$s !important;margin-right:%2$s !important;margin-bottom:%3$s !important;margin-left:%4$s !important;',
 							esc_attr( et_pb_get_spacing( $enrolled_info_margin, 'top', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $enrolled_info_margin, 'right', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $enrolled_info_margin, 'bottom', '0px' ) ),
@@ -1093,7 +1113,7 @@ class CourseEnrollment extends ET_Builder_Module {
 					array(
 						'selector' => '%%order_class%% .tutor-course-progress-wrapper h3',
 						'declaration' => sprintf(
-							'margin-top: %1$s;margin-right:%2$s;margin-bottom:%3$s;margin-left:%4$s;',
+							'margin-top: %1$s !important;margin-right: %2$s !important;margin-bottom: %3$s !important;margin-left: %4$s !important;',
 							esc_attr( et_pb_get_spacing( $course_progress_title_margin, 'top', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $course_progress_title_margin, 'right', '0px' ) ),
 						    esc_attr( et_pb_get_spacing( $course_progress_title_margin, 'bottom', '0px' ) ),
@@ -1181,8 +1201,6 @@ class CourseEnrollment extends ET_Builder_Module {
 					)
 				);
 			}
-		}
-
 			
 
 		// btn width.
@@ -1372,7 +1390,7 @@ class CourseEnrollment extends ET_Builder_Module {
 		}
 		// set styles end
 
-		$output = self::get_edit_template( $this->props );
+		$output = self::get_content( $this->props );
 		if ( '' === $output ) {
 			return '';
 		}

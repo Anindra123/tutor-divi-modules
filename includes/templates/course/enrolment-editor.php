@@ -11,7 +11,7 @@ global $is_enrolled;
 
 $is_enrolled          = apply_filters( 'tutor_alter_enroll_status', $is_enrolled );
 
-$enrollment_mode      = $args['preview_mode'];
+$enrollment_mode      = $is_enrolled ? 'enrolled' : $args['preview_mode'];
 $course               = get_post( $args['course'] );
 $is_purchasable       = tutor_utils()->is_course_purchasable( $args['course'] );
 $lesson_url           = tutor_utils()->get_course_first_lesson( );
